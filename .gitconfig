@@ -25,5 +25,7 @@
         autoupdate = true
 [tag]
         sort = version:refname
+[alias]
+        cleanup-branches = !git branch --merged | grep -vE \"^\\*|main|master|develop\" | xargs -r git branch -d
 [core]
         excludesfile = ~/.gitignore
