@@ -2,6 +2,10 @@
 # just reference this file in your .zshrc like this:
 # source ~/my-repos/linuxconfig/.zshrc 
 
+export HISTSIZE=10000000
+export SAVEHIST=$HISTSIZE
+setopt EXTENDED_HISTORY
+
 
 if [[ -n $SSH_CONNECTION ]]; then
   PROMPT='%F{red}%n@%m%f %~ %# '  # Show username@hostname in red for SSH sessions
