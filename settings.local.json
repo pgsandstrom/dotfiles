@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": ["Bash(npm test:*)"]
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"require(require('path').join(require('os').homedir(), '.claude-scripts', 'play-sound.js'))\""
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "AskUserQuestion",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"require(require('path').join(require('os').homedir(), '.claude-scripts', 'play-sound.js'))\""
+          }
+        ]
+      }
+    ]
+  }
+}
