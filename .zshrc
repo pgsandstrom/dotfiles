@@ -1,6 +1,6 @@
 # pro tip:
 # just reference this file in your .zshrc like this:
-# source ~/my-repos/linuxconfig/.zshrc 
+# source ~/my-repos/dotfiles/.zshrc 
 
 export HISTSIZE=10000000
 export SAVEHIST=$HISTSIZE

@@ -26,14 +26,17 @@ The `gsw` function switches to a branch by substring match, checking local branc
 Files can be symlinked or sourced from their target locations:
 
 **macOS:**
+
 - `.zshrc` -> `~/.zshrc` (symlink or source)
 - `.gitconfig` -> `~/.gitconfig`
 - `init.lua` -> `~/.config/nvim/init.lua`
 
 **Windows (Git Bash):**
-- Add `source /c/path/to/linuxconfig/.bashrc` to `~/.bashrc`
+
+- Add `source /c/path/to/dotfiles/.bashrc` to `~/.bashrc`
 - `.gitconfig` -> `~/.gitconfig`
 
 **Claude Code (all platforms):**
+
 - Copy `settings.local.json` to `.claude/settings.local.json` in other projects
 - Copy `.claude-scripts/` to `~/.claude-scripts/`
