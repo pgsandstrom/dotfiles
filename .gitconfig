@@ -25,3 +25,5 @@
         autoupdate = true
 [tag]
         sort = version:refname
+[core]
+        excludesfile = ~/.gitignore
