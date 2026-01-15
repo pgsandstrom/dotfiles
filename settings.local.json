@@ -23,6 +23,15 @@
             "command": "node -e \"require(require('path').join(require('os').homedir(), '.claude-scripts', 'play-sound.js'))\""
           }
         ]
+      },
+      {
+        "matcher": "PermissionRequest",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"require(require('path').join(require('os').homedir(), '.claude-scripts', 'play-sound.js'))\""
+          }
+        ]
       }
     ]
   }
