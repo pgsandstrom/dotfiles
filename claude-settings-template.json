@@ -1,7 +1,14 @@
 {
+  "//": "just rename to settings.local.json and paste into .claude in a project",
   "permissions": {
     "defaultMode": "acceptEdits",
-    "allow": ["Bash(npm test:*)"]
+    "allow": [
+      "Bash(npm run format:*)",
+      "Bash(npm run lint:*)",
+      "Bash(npm run pre-push:*)",
+      "Bash(npm run test:*)",
+      "Bash(npm run typecheck:*)"
+    ]
   },
   "hooks": {
     "Stop": [
