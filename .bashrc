@@ -93,3 +93,16 @@ elif [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
 elif [ -f /opt/homebrew/etc/bash_completion.d/git-completion.bash ]; then
   source /opt/homebrew/etc/bash_completion.d/git-completion.bash
 fi
+
+# Wire up git completions for aliases
+if type __git_complete &>/dev/null; then
+  __git_complete gs _git_status
+  __git_complete gc _git_commit
+  __git_complete gd _git_diff
+  __git_complete gch _git_checkout
+  __git_complete gcp _git_cherry_pick
+  __git_complete gl _git_log
+  __git_complete ga _git_add
+  __git_complete gb _git_branch
+  __git_complete gr _git_restore
+fi
