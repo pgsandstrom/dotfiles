@@ -38,6 +38,14 @@ gsw() {
   # Check local branches first
   locals=($(git branch --format="%(refname:short)" --list "*$1*"))
 
+  # Prefer an exact local match (e.g. "main" over "maintenance")
+  for b in "${locals[@]}"; do
+    if [ "$b" = "$1" ]; then
+      git switch -- "$b"
+      return
+    fi
+  done
+
   if [ ${#locals[@]} -eq 1 ]; then
     git switch -- "${locals[1]}"   # 1-indexed since zsh, would need to change to work in bash
     return
@@ -51,6 +59,14 @@ gsw() {
   # Check remote branches
   # the grep is necessary to skip `HEAD` in the unlikely scenario that `HEAD` matches the argument
   remotes=($(git branch -r --format="%(refname:short)" --list "*$1*" | grep -v '/HEAD$'))
+
+  # Prefer an exact remote match (compares against the branch name without the remote prefix)
+  for b in "${remotes[@]}"; do
+    if [ "${b#*/}" = "$1" ]; then
+      git switch --track -- "$b"
+      return
+    fi
+  done
 
   if [ ${#remotes[@]} -eq 0 ]; then
     echo "❌ No branch (local or remote) found containing '$1'"

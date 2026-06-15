@@ -50,26 +50,42 @@ gsw() {
   # Read local branches into bash array
   mapfile -t locals < <(git branch --format="%(refname:short)" --list "*$query*")
 
+  # Prefer an exact local match (e.g. "main" over "maintenance")
+  for b in "${locals[@]}"; do
+    if [[ "$b" == "$query" ]]; then
+      git switch -- "$b"
+      return
+    fi
+  done
+
   if (( ${#locals[@]} == 1 )); then
     git switch -- "${locals[0]}"
     return
   elif (( ${#locals[@]} > 1 )); then
-    echo "Multiple *local* branches found containing '$query':"
+    echo "⚠️  Multiple *local* branches found containing '$query':"
     printf '  %s\n' "${locals[@]}"
-    echo "Please specify more characters to narrow it down."
+    echo "❗ Please specify more characters to narrow it down."
     return 1
   fi
 
   # Remote branches (skip HEAD)
   mapfile -t remotes < <(git branch -r --format="%(refname:short)" --list "*$query*" | grep -v '/HEAD$')
 
+  # Prefer an exact remote match (compares against the branch name without the remote prefix)
+  for b in "${remotes[@]}"; do
+    if [[ "${b#*/}" == "$query" ]]; then
+      git switch --track -- "$b"
+      return
+    fi
+  done
+
   if (( ${#remotes[@]} == 0 )); then
-    echo "No branch (local or remote) found containing '$query'"
+    echo "❌ No branch (local or remote) found containing '$query'"
     return 1
   elif (( ${#remotes[@]} > 1 )); then
-    echo "Multiple *remote* branches found containing '$query':"
+    echo "⚠️  Multiple *remote* branches found containing '$query':"
     printf '  %s\n' "${remotes[@]}"
-    echo "Please specify more characters to narrow it down."
+    echo "❗ Please specify more characters to narrow it down."
     return 1
   else
     b="${remotes[0]}"
