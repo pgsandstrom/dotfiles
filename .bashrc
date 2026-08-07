@@ -6,6 +6,8 @@ export HISTSIZE=10000000
 export HISTFILESIZE=$HISTSIZE
 export HISTTIMEFORMAT="%F %T "
 
+export HOMEBREW_NO_UPDATE_REPORT_NEW=1
+
 # -----------------------------------------
 # PROMPT
 # -----------------------------------------
